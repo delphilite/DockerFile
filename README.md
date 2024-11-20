@@ -2,6 +2,8 @@
 ![License](https://img.shields.io/github/license/delphilite/DockerFile)
 ![stars](https://img.shields.io/github/stars/delphilite/DockerFile.svg)
 
+[English](./README.md) | [Chinese](./README.zh-CN.md)
+
 This repository provides a collection of Dockerfiles to create Docker-based build environments for Delphi on Windows. It simplifies the process of building Delphi projects by ensuring a consistent, isolated environment.
 
 ## Features
@@ -71,3 +73,8 @@ This project is licensed under the Mozilla Public License 2.0. See the [LICENSE]
 Special thanks to the following projects:
 - [3proxy](https://github.com/3proxy/3proxy): A free, open-source proxy server that supports numerous protocols and provides various network services.
 - [Caddy](https://github.com/caddyserver/caddy): A powerful, extensible web server written in Go, known for its automatic HTTPS feature and easy configuration.
+
+## Disclaimer
+This code is predetermined for educational, personal, AND non-commercial use only. Please buy and use only original licensed software.
+
+The software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
