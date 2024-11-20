@@ -1,0 +1,32 @@
+# escape=`
+
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+
+RUN `
+    # Download all files
+    curl -fSLo setup.exe http://host.docker.internal/d12/embarcadero.delphi.12.2.v29.0.53982.0329.lite.v18.4.exe `
+    && curl -fSLo ext.core.7z http://host.docker.internal/d12/ext.core.7z `
+    && curl -fSLo ext.docs.7z http://host.docker.internal/d12/ext.docs.7z `
+    && curl -fSLo ext.x64.7z http://host.docker.internal/d12/ext.x64.7z `
+    `
+    # Install silently
+    && start /w setup.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES `
+    `
+    # Clean up temporary files
+    && del setup.exe `
+    && del ext.*.7z `
+    && del /Q /S %TEMP%\* `
+    `
+    # Set environment variables
+    && setx /M BDS "C:\Program Files (x86)\Embarcadero\Studio\23.0" `
+    && setx /M BDSBIN "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin" `
+    && setx /M BDSCOMMONDIR "C:\Users\Public\Documents\Embarcadero\Studio\23.0" `
+    && setx /M BDSINCLUDE "C:\Program Files (x86)\Embarcadero\Studio\23.0\include" `
+    && setx /M BDSLIB "C:\Program Files (x86)\Embarcadero\Studio\23.0\lib" `
+    && setx /M FrameworkDir "C:\Windows\Microsoft.NET\Framework\v4.0.30319" `
+    && setx /M FrameworkVersion "v4.5" `
+    && setx /M FrameworkSDKDir "" `
+    && setx /M LANGDIR "EN" `
+    && setx /M PATH "%PATH%;C:\Windows\Microsoft.NET\Framework\v4.0.30319;C:\Program Files (x86)\Embarcadero\Studio\23.0\bin;C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64" `
+    && setx /M PLATFORM "" `
+    && setx /M PlatformSDK ""

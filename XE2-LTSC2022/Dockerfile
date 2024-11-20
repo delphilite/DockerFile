@@ -1,0 +1,34 @@
+# escape=`
+
+FROM mcr.microsoft.com/dotnet/framework/runtime:3.5-windowsservercore-ltsc2022
+
+# Define build argument for components
+ARG COMPONENTS=core,fmx,x64,osx
+
+RUN `
+    # Download all files
+    curl -fSLo setup.exe http://host.docker.internal/xe2/embarcadero.delphi.xe2.rtm.inc.update4.hotfix1.v16.0.4504.48759.lite.v5.6.exe `
+    && curl -fSLo vjredist.exe http://host.docker.internal/xe2/vjredist.exe `
+    `
+    # Add DirectX version bypass setup.exe detection
+    && reg add "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\DirectX" /v Version /t REG_SZ /d "4.09.00.0904" /f > NUL 2>&1 `
+    `
+    # Install silently
+    && start /w setup.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /COMPONENTS="%COMPONENTS%" /TASKS="patch" `
+    `
+    # Clean up temporary files
+    && del setup.exe `
+    && del vjredist.exe `
+    && del /Q /S %TEMP%\* `
+    `
+    # Set environment variables
+    && setx /M BDS "C:\Program Files (x86)\Embarcadero\RAD Studio\9.0" `
+    && setx /M BDSBIN "C:\Program Files (x86)\Embarcadero\RAD Studio\9.0\bin" `
+    && setx /M BDSCOMMONDIR "C:\Users\Public\Documents\RAD Studio\9.0" `
+    && setx /M BDSINCLUDE "C:\Program Files (x86)\Embarcadero\RAD Studio\9.0\include" `
+    && setx /M BDSLIB "C:\Program Files (x86)\Embarcadero\RAD Studio\9.0\lib" `
+    && setx /M FrameworkDir "C:\Windows\Microsoft.NET\Framework\v3.5" `
+    && setx /M FrameworkVersion "v3.5" `
+    && setx /M FrameworkSDKDir "" `
+    && setx /M LANGDIR "EN" `
+    && setx /M PATH "%PATH%;C:\Windows\Microsoft.NET\Framework\v3.5;C:\Program Files (x86)\Embarcadero\RAD Studio\9.0\bin;C:\Program Files (x86)\Embarcadero\RAD Studio\9.0\bin64"
