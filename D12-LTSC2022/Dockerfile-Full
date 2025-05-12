@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
 RUN `
     # Download all files
-    curl -fSLo setup.exe http://host.docker.internal/d12/embarcadero.delphi.12.2.v29.0.53982.0329.lite.v18.4.exe `
+    curl -fSLo setup.exe http://host.docker.internal/d12/embarcadero.delphi.12.3.v29.0.55362.2017.lite.v18.5.exe `
     && curl -fSLo ext.android.7z http://host.docker.internal/d12/ext.android.7z `
     && curl -fSLo ext.core.7z http://host.docker.internal/d12/ext.core.7z `
     && curl -fSLo ext.docs.7z http://host.docker.internal/d12/ext.docs.7z `
